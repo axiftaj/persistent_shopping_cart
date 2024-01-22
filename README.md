@@ -1,39 +1,80 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+#persistent_shopping_cart
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+A Flutter package for managing a persistent shopping cart with advanced features.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+Features
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Persistent Storage: Utilizes Hive for storing shopping cart data persistently.
+Easy Integration: Simplifies the integration of a shopping cart into your Flutter application.
+Prebuilt Widgets: Provides prebuilt widgets for common shopping cart UI components.
+Item Count Widget: Display the current count of items in the shopping cart.
+List Cart Items Widget: Easily list and display cart items with minimal code.
+Show and Update Cart Item Widget: Display and update individual cart items effortlessly.
 
-## Features
+Installation
+Add the following line to your pubspec.yaml file:
+dependencies:
+persistent_shopping_cart: ^1.0.0
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+flutter pub get
 
-## Getting started
+Usage:
+import 'package:persistent_shopping_cart/persistent_shopping_cart.dart';
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+void main() async {
+final cart = PersistentShoppingCart();
+await cart.init();
+await cart.registerAdapters();
+await cart.openCartBox();
+}
 
-## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+import 'package:flutter/material.dart';
 
-```dart
-const like = 'sample';
-```
+final cart = PersistentShoppingCart();
 
-## Additional information
+void main() {
+runApp(
+MaterialApp(
+home: Scaffold(
+appBar: AppBar(
+title: const Text('My App'),
+actions: [
+cart.showCartItemCountWidget(
+cartItemCountWidgetBuilder: (itemCount) => IconButton(
+onPressed: () {
+// Navigate to cart view
+},
+icon: Badge(
+badgeContent: Text(itemCount.toString()),
+child: const Icon(Icons.shopping_cart),
+),
+),
+),
+],
+),
+// Your app content
+),
+),
+);
+}
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+
+Show and Update Cart Item Widget
+
+import 'package:flutter/material.dart';
+
+final cart = PersistentShoppingCart();
+
+void main() {
+runApp(
+MaterialApp(
+home: Scaffold(
+body: cart.listCartItems(
+cartTileWidget: ({required LineItems data}) => CartTileWidget(data: data),
+showEmptyCartMsgWidget: const EmptyCartMsgWidget(),
+),
+),
+),
+);
+}

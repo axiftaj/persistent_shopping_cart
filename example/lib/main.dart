@@ -13,8 +13,7 @@ void main() async {
   await persistentShoppingCart.registerAdapters();
   await persistentShoppingCart.openCartBox();
 
-  final jsonString =
-      await persistentShoppingCart.readJsonFromAsset('../assets/cart.json');
+  final jsonString = await persistentShoppingCart.readJsonFromAsset('../assets/cart.json');
   final jsonData = json.decode(jsonString);
 
   final cartModel = CartModel.fromJson(jsonData);
