@@ -3,6 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:persistent_shopping_cart/model/cart_model.dart';
 
 class CartController {
+
   final Box<PersistentShoppingCartItem> _cartBox =
       Hive.box<PersistentShoppingCartItem>('cartBox');
 

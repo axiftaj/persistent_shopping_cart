@@ -1,4 +1,4 @@
-// exampl's main.dart
+// example's main.dart
 import 'package:flutter/material.dart';
 import 'package:persistent_shopping_cart/persistent_shopping_cart.dart';
 import 'package:badges/badges.dart' as badges;
