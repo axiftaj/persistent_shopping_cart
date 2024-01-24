@@ -36,7 +36,7 @@ await PersistentShoppingCart().init();
 
 ```dart
 // Add product to the cart
-await PersistentShoppingCart().addToCart(product);
+await PersistentShoppingCart().addToCart(PersistentShoppingCartItem());
 
 // Remove product from the cart
 await PersistentShoppingCart().removeFromCart(productId);
