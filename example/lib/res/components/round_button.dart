@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:persistent_shopping_cart/res/components/loading_widget.dart';
+import 'package:persistent_shopping_cart_example/res/components/loading_widget.dart';
 
 class RoundButton extends StatelessWidget {
   final String title;
