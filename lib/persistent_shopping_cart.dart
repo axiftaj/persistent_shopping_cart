@@ -1,4 +1,5 @@
-// persistent_shopping_cart.dart
+/// The main library for the persistent shopping cart package.
+/// Provides functionality to manage a shopping cart using Hive for local storage.
 library persistent_shopping_cart;
 
 import 'dart:developer';
@@ -9,6 +10,7 @@ import 'package:persistent_shopping_cart/controller/cart_controller.dart';
 import 'package:persistent_shopping_cart/model/cart_model.dart';
 import 'package:persistent_shopping_cart/widgets/cart_list.dart';
 
+// Extension method for Iterable class
 extension IterableExtensions<T> on Iterable<T> {
   T? firstWhereOrNull(bool Function(T) test) {
     for (final element in this) {
@@ -20,8 +22,9 @@ extension IterableExtensions<T> on Iterable<T> {
   }
 }
 
+/// The main class for interacting with the persistent shopping cart.
 class PersistentShoppingCart {
-  // Initialize hive
+  /// Initializes Hive and opens the cart box.
   Future<void> init() async {
     WidgetsFlutterBinding.ensureInitialized();
     var directory = await getApplicationDocumentsDirectory();
@@ -32,11 +35,13 @@ class PersistentShoppingCart {
     await Hive.openBox<PersistentShoppingCartItem>('cartBox');
   }
 
+  /// Adds a [PersistentShoppingCartItem] to the shopping cart.
   Future<void> addToCart(PersistentShoppingCartItem cartItem) async {
     CartController().addToCart(cartItem);
     log('CartItem added to Hive box: ${cartItem.toJson()}');
   }
 
+  /// Removes a product from the shopping cart.
   Future<bool> removeFromCart(String productId) async {
     bool removed = CartController().removeFromCart(productId);
     if (removed) {
@@ -47,28 +52,51 @@ class PersistentShoppingCart {
     return removed;
   }
 
+  /// Increments the quantity of a cart item.
   Future<void> incrementCartItemQuantity(String productId) async {
     CartController().incrementQuantity(productId);
     log('CartItem quantity incremented: $productId');
   }
 
+  /// Decrements the quantity of a cart item.
   Future<void> decrementCartItemQuantity(String productId) async {
     CartController().decrementQuantity(productId);
     log('CartItem quantity decremented: $productId');
   }
 
+  /// Calculates the total price of all items in the shopping cart.
   double calculateTotalPrice() {
     return CartController().calculateTotalPrice();
   }
 
+  /// Gets the total number of items in the shopping cart.
   int getCartItemCount() {
     return CartController().getCartItemCount();
   }
 
+  /// Clears all items from the shopping cart.
   void clearCart() {
     CartController().clearCart();
   }
 
+  /// Retrieves the cart data including items and total price.
+  Map<String, dynamic> getCartData() {
+    final cartController = CartController();
+
+    // Get the list of cart items
+    List<PersistentShoppingCartItem> cartItems = cartController.getCartItems();
+
+    // Get the total price
+    double totalPrice = cartController.calculateTotalPrice();
+
+    // Return a map with cart data and total price
+    return {
+      'cartItems': cartItems,
+      'totalPrice': totalPrice,
+    };
+  }
+
+  /// Displays the list of cart items using the provided widgets.
   Widget showCartItems({
     required Widget Function({required PersistentShoppingCartItem data})
         cartTileWidget,
@@ -80,6 +108,7 @@ class PersistentShoppingCart {
     );
   }
 
+  /// Displays the current cart item count using the provided widget builder.
   Widget showCartItemCountWidget(
       {required Widget Function(int itemCount) cartItemCountWidgetBuilder}) {
     return ValueListenableBuilder<Box<PersistentShoppingCartItem>>(
@@ -91,6 +120,7 @@ class PersistentShoppingCart {
     );
   }
 
+  /// Displays the total amount in the cart using the provided widget builder.
   Widget showTotalAmountWidget(
       {required Widget Function(double totalAmount)
           cartTotalAmountWidgetBuilder}) {
@@ -103,6 +133,7 @@ class PersistentShoppingCart {
     );
   }
 
+  /// Displays an icon button based on whether a product is in the cart or not.
   Widget showAndUpdateCartItemWidget({
     required Widget inCartWidget,
     required Widget notInCartWidget,
