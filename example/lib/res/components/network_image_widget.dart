@@ -18,56 +18,44 @@ class NetworkImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius),
-      child: imageUrl == '' || imageUrl == "null"
-          ? Container(
-              width: width,
-              height: height,
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.circular(13),
-              ),
-              child: Icon(
-                Icons.person_outline,
-                size: iconSize,
-              ))
-          : CachedNetworkImage(
-              imageUrl: imageUrl,
-              width: width,
-              height: height,
-              imageBuilder: (context, imageProvider) => Container(
-                width: width,
-                height: height,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              placeholder: (context, url) => Container(
-                width: width,
-                height: height,
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.circular(borderRadius),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.all(12.0),
-                  child: LoadingWidget(),
-                ),
-              ),
-              errorWidget: (context, url, error) => Container(
-                  width: width,
-                  height: height,
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(13),
-                  ),
-                  child: Icon(
-                    Icons.error_outline,
-                    size: iconSize,
-                  )),
+      child: CachedNetworkImage(
+        imageUrl: imageUrl,
+        width: width,
+        height: height,
+        imageBuilder: (context, imageProvider) => Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: imageProvider,
+              fit: BoxFit.cover,
             ),
+          ),
+        ),
+        placeholder: (context, url) => Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            color: Colors.grey,
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
+          child: const Padding(
+            padding: EdgeInsets.all(12.0),
+            child: LoadingWidget(),
+          ),
+        ),
+        errorWidget: (context, url, error) => Container(
+            width: width,
+            height: height,
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              borderRadius: BorderRadius.circular(13),
+            ),
+            child: Icon(
+              Icons.error_outline,
+              size: iconSize,
+            )),
+      ) ,
     );
   }
 }
