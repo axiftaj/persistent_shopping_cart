@@ -1,4 +1,4 @@
-## 0.0.4
+## 0.0.5
 
-* Bug fixes 
+* Add feature to retrieve cart data, total price and updated package documentation
 
