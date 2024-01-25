@@ -16,7 +16,6 @@ class CartTileWidget extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.only(bottom: 10),
       width: double.infinity,
-      height: 100,
       decoration: BoxDecoration(
         color: Colors.grey.withOpacity(.05),
         borderRadius: BorderRadius.circular(10),
@@ -30,49 +29,60 @@ class CartTileWidget extends StatelessWidget {
             imageUrl: data.productThumbnail ?? '',
           ),
           const SizedBox(width: 10),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(data.productName),
-              Row(
-                children: [
-                  Text(
-                    "\$ ${data.unitPrice}",
-                    style: Theme.of(context).textTheme.headlineSmall,
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(data.productName ,
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700 , color: Colors.white),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Text(data.productDescription.toString() ,
+                    maxLines: 2,
+                    style: const TextStyle(fontSize: 12,color: Colors.white),
                   ),
-                  const SizedBox(width: 20),
-                  InkWell(
-                    onTap: () async {
-                      bool removed =
-                          await _shoppingCart.removeFromCart(data.productId);
-                      if (removed) {
-                        // Handle successful removal
-                        showSnackBar(context, removed);
-                      } else {
-                        // Handle the case where if product was not found in the cart
-                      }
-                    },
-                    child: Container(
-                      height: 30,
-                      width: 70,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: Colors.red),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Remove',
-                          style: Theme.of(context).textTheme.bodySmall,
+                ),
+
+                Row(
+                  children: [
+                    Text(
+                      "\$ ${data.unitPrice}",
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    const SizedBox(width: 20),
+                    InkWell(
+                      onTap: () async {
+                        bool removed =
+                        await _shoppingCart.removeFromCart(data.productId);
+                        if (removed) {
+                          // Handle successful removal
+                          showSnackBar(context, removed);
+                        } else {
+                          // Handle the case where if product was not found in the cart
+                        }
+                      },
+                      child: Container(
+                        height: 30,
+                        width: 70,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: Colors.red),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Remove',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
                         ),
                       ),
-                    ),
-                  )
-                ],
-              ),
-            ],
+                    )
+                  ],
+                ),
+              ],
+            ),
           ),
-          const Spacer(),
           Column(
             children: [
               InkWell(
@@ -120,7 +130,7 @@ class CartTileWidget extends StatelessWidget {
             : 'Product not found in the cart.',
       ),
       backgroundColor: removed ? Colors.green : Colors.red,
-      duration: Duration(milliseconds: 100),
+      duration: const  Duration(seconds: 1),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
