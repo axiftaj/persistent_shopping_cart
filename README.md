@@ -2,6 +2,11 @@
 
 Persistent Shopping Cart is a Flutter package that provides a simple and persistent shopping cart functionality for your mobile application. It uses Hive for local storage, making the cart data persist across app sessions.
 
+## Demo Preview
+
+![Demo Preview](https://media.giphy.com/media/Iiakfpl9d3yGaxTQKa/giphy.gif)
+
+
 ## Features
 
 - **Initialization**: Easily initialize the shopping cart using `init()` method.
