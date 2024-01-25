@@ -15,6 +15,7 @@ Persistent Shopping Cart is a Flutter package that provides a simple and persist
 - **Show Cart Item Count Widget**: Show a widget displaying the current cart item count using the `showCartItemCountWidget` method.
 - **Show Total Amount Widget**: Display a widget showing the total amount of items in the cart with the `showTotalAmountWidget` method.
 - **Show and Update Cart Item Widget**: Show a widget that dynamically updates based on whether a product is in the cart or not, using the `showAndUpdateCartItemWidget` method.
+- **Retrieve Cart Data and Total Price**: Use `getCartData` method in the `PersistentShoppingCart` class to get a list of cart items and the total price.
 
 ## Getting Started
 
@@ -55,6 +56,11 @@ int itemCount = PersistentShoppingCart().getCartItemCount();
 
 // Clear the cart
 PersistentShoppingCart().clearCart();
+
+// Retrieve cart data and total price
+Map<String, dynamic> cartData = PersistentShoppingCart().getCartData();
+List<PersistentShoppingCartItem> cartItems = cartData['cartItems'];
+double totalPriceFromData = cartData['totalPrice'];
 ```
 
 ## Widgets
