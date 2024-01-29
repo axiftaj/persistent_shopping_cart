@@ -41,7 +41,7 @@ class CartController {
           item.key,
           PersistentShoppingCartItem(
             productId: item.productId,
-            quantity: 1,
+            quantity: item.quantity,
             productName: item.productName,
             unitPrice: item.unitPrice,
             productDescription: item.productDescription,
