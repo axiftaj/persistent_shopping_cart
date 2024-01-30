@@ -8,13 +8,13 @@ class EmptyCartMsgWidget extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Center(
         child: SizedBox(
-      height: size.height * .7,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text('Your cart is empty'),
-          const SizedBox(height: 20),
-          ElevatedButton(
+          height: size.height * .7,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('Your cart is empty'),
+              const SizedBox(height: 20),
+              ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },

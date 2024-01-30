@@ -6,6 +6,7 @@ import 'package:persistent_shopping_cart_example/model/item_model.dart';
 import 'package:persistent_shopping_cart_example/res/components/network_image_widget.dart';
 import 'package:persistent_shopping_cart_example/cart_view.dart';
 
+
 void main() async {
   await PersistentShoppingCart().init();
   runApp(
@@ -160,7 +161,7 @@ class ProductsScreen extends StatelessWidget {
                                             productDescription: itemsList[index].productDescription,
                                             unitPrice: double.parse(itemsList[index].unitPrice.toString()),
                                             productThumbnail: itemsList[index].productThumbnail.toString(),
-                                            quantity: 1
+                                            quantity: 2
                                         ),
                                       ),
                                     )
