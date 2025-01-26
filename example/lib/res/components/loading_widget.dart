@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class LoadingWidget extends StatelessWidget {
   final double size;
 
-  const LoadingWidget({Key? key, this.size = 36.0}) : super(key: key);
+  const LoadingWidget({super.key, this.size = 36.0});
 
   @override
   Widget build(BuildContext context) {

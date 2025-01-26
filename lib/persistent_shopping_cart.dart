@@ -1,6 +1,6 @@
 /// The main library for the persistent shopping cart package.
 /// Provides functionality to manage a shopping cart using Hive for local storage.
-library persistent_shopping_cart;
+library;
 
 import 'dart:developer';
 import 'package:flutter/material.dart';
@@ -8,7 +8,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:persistent_shopping_cart/controller/cart_controller.dart';
 import 'package:persistent_shopping_cart/model/cart_model.dart';
-import 'package:persistent_shopping_cart/widgets/cart_list.dart';
 
 // Extension method for Iterable class
 extension IterableExtensions<T> on Iterable<T> {
@@ -96,15 +95,26 @@ class PersistentShoppingCart {
     };
   }
 
-  /// Displays the list of cart items using the provided widgets.
+  /// Displays the list of cart items using the provided builder.
+  /// Define whether you want to display items in a ListView, GridView, etc.
   Widget showCartItems({
-    required Widget Function({required PersistentShoppingCartItem data})
-        cartTileWidget,
+    required Widget Function(
+      BuildContext context,
+      List<PersistentShoppingCartItem> cartItems,
+    ) cartItemsBuilder,
     required Widget showEmptyCartMsgWidget,
   }) {
-    return ListCartItems(
-      cartTileWidget: cartTileWidget,
-      showEmptyCartMsgWidget: showEmptyCartMsgWidget,
+    return ValueListenableBuilder<Box<PersistentShoppingCartItem>>(
+      valueListenable: CartController().cartListenable,
+      builder: (context, box, child) {
+        final cartItems = CartController().getCartItems();
+
+        if (cartItems.isEmpty) {
+          return showEmptyCartMsgWidget;
+        }
+
+        return cartItemsBuilder(context, cartItems);
+      },
     );
   }
 

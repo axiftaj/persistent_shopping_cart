@@ -16,7 +16,7 @@ Persistent Shopping Cart is a Flutter package that provides a simple and persist
 - **Calculate Total Price**: Get the total price of items in the cart using the `calculateTotalPrice` method.
 - **Get Cart Item Count**: Retrieve the total number of items in the cart with the `getCartItemCount` method.
 - **Clear Cart**: Remove all items from the cart using the `clearCart` method.
-- **Show Cart Items**: Display the cart items using the `showCartItems` method, providing customizable widgets for each cart item and an empty cart message.
+- **Show Cart Items**: Display the cart items using the `showCartItems` method, providing flexible builders for customizing how the cart is displayed (e.g., ListView, GridView).
 - **Show Cart Item Count Widget**: Show a widget displaying the current cart item count using the `showCartItemCountWidget` method.
 - **Show Total Amount Widget**: Display a widget showing the total amount of items in the cart with the `showTotalAmountWidget` method.
 - **Show and Update Cart Item Widget**: Show a widget that dynamically updates based on whether a product is in the cart or not, using the `showAndUpdateCartItemWidget` method.
@@ -72,12 +72,26 @@ double totalPriceFromData = cartData['totalPrice'];
 
 ### Show Cart Items
 
+The showCartItems method now provides flexibility to define how cart items are displayed (e.g., ListView, GridView) using a builder function. If the cart is empty, a custom widget is shown.
+
 ```dart
 PersistentShoppingCart().showCartItems(
-  cartTileWidget: ({required PersistentShoppingCartItem data}) {
-    // Your custom cart item widget
+  cartItemsBuilder: (BuildContext context, List<PersistentShoppingCartItem> cartItems) {
+    // Define your custom widget for displaying cart items
+    return ListView.builder(
+      itemCount: cartItems.length,
+      itemBuilder: (context, index) {
+        final item = cartItems[index];
+        return ListTile(
+          title: Text(item.name), // Replace with your cart item widget
+          subtitle: Text('Quantity: ${item.quantity}'),
+        );
+      },
+    );
   },
-  showEmptyCartMsgWidget: YourEmptyCartMessageWidget(),
+  showEmptyCartMsgWidget: Center(
+    child: Text('Your cart is empty!'), // Replace with your empty cart widget
+  ),
 );
 ```
 

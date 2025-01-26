@@ -6,11 +6,13 @@ import 'package:persistent_shopping_cart_example/model/item_model.dart';
 import 'package:persistent_shopping_cart_example/res/components/network_image_widget.dart';
 import 'package:persistent_shopping_cart_example/cart_view.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   await PersistentShoppingCart().init();
   runApp(
     MaterialApp(
+      navigatorKey: navigatorKey,
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.dark,
@@ -24,16 +26,16 @@ void main() async {
 }
 
 class ProductsScreen extends StatelessWidget {
-   ProductsScreen({super.key});
+   const ProductsScreen({super.key});
 
-  List<ItemModel> itemsList = const [
-    ItemModel(productId: '1', productName: 'Fried Fish Burger' ,productDescription: 'Served with fries & coleslaw' , productThumbnail: 'https://taytocafe.com/delivery/assets/products/642da78b9bac1_Double-Tangy-B.png' , unitPrice: 30, ),
-    ItemModel(productId: '2' ,productName: 'Loaded Beef Jalapeno' ,productDescription: '200g Premium beef with jalapeno sauce' , productThumbnail: 'https://taytocafe.com/delivery/assets/products/642da91abab43_Loaded-Chicken-Jalapeno-B.png' , unitPrice: 30, ),
-    ItemModel(productId: '3',productName: 'Crispy Penny Pasta' ,productDescription: 'Creamy mushroom sauce with three types of bell pepper mushrooms & fried breast fillet' , productThumbnail: 'https://taytocafe.com/delivery/assets/products/1671690922.png' , unitPrice: 50, ),
-    ItemModel(productId: '4',productName: 'Moroccan Fish' ,productDescription: "Fried filet of fish served with Moroccan sauce sided by veggies & choice of side" , productThumbnail: 'https://taytocafe.com/delivery/assets/products/1671691271.png' , unitPrice: 20, ),
-    ItemModel(productId: '5',productName: 'Creamy Chipotle' ,productDescription: 'Grilled chicken fillet topped with chipotle sauce' , productThumbnail: 'https://taytocafe.com/delivery/assets/products/6569bee77d7c2_12.png' , unitPrice: 40, ),
-    ItemModel(productId: '6',productName: 'Onion Rings' ,productDescription: '10 imported crumbed onion rings served with chilli garlic sauce' , productThumbnail: 'https://taytocafe.com/delivery/assets/products/1671634436.png' , unitPrice: 5 ),
-    ItemModel(productId: '7',productName: 'Pizza Fries' ,productDescription: 'French fries topped with chicken chunks & pizza sauce with Nachos & cheese' , productThumbnail: 'https://taytocafe.com/delivery/assets/products/1671634207.png' , unitPrice: 10, ),
+  final List<ItemModel> itemsList = const [
+    ItemModel(productId: '1', productName: 'Fried Fish Burger' ,productDescription: 'Served with fries & coleslaw' , productThumbnail: 'https://plus.unsplash.com/premium_photo-1664392182760-b1e2da62b7f7?q=80&w=3139&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' , unitPrice: 30, ),
+    ItemModel(productId: '2' ,productName: 'Loaded Fries' ,productDescription: '200g Premium Loaded Fries' , productThumbnail: 'https://plus.unsplash.com/premium_photo-1683861800944-0ffaf3ef9b13?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' , unitPrice: 30, ),
+    ItemModel(productId: '3',productName: 'Pesto Pasta' ,productDescription: '400g Pesto Pasta' , productThumbnail: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' , unitPrice: 50, ),
+    ItemModel(productId: '4',productName: 'Moroccan Fish' ,productDescription: "Fried filet of fish served with Moroccan sauce sided by veggies & choice of side" , productThumbnail: 'https://images.unsplash.com/photo-1492470026006-0e12a33eb7fb?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' , unitPrice: 20, ),
+    ItemModel(productId: '5',productName: 'Creamy Chipotle' ,productDescription: 'Grilled chicken fillet topped with chipotle sauce' , productThumbnail: 'https://images.unsplash.com/photo-1612185533785-cc6f4c55030b?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' , unitPrice: 40, ),
+    ItemModel(productId: '6',productName: 'Onion Rings' ,productDescription: '10 imported crumbed onion rings served with chilli garlic sauce' , productThumbnail: 'https://plus.unsplash.com/premium_photo-1701013639121-db90aefda5f2?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' , unitPrice: 5 ),
+    ItemModel(productId: '7',productName: 'Pizza Fries' ,productDescription: 'French fries topped with chicken chunks & pizza sauce with Nachos & cheese' , productThumbnail: 'https://images.unsplash.com/photo-1525518392674-39ba1fca2ec2?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' , unitPrice: 10, ),
   ] ;
 
   @override
