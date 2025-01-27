@@ -72,7 +72,7 @@ double totalPriceFromData = cartData['totalPrice'];
 
 ### Show Cart Items
 
-The showCartItems method now provides flexibility to define how cart items are displayed (e.g., ListView, GridView) using a builder function. If the cart is empty, a custom widget is shown.
+The showCartItems method now provides flexibility to define how cart items are displayed (e.g., ListView, GridView) using a builder function.
 
 ```dart
 PersistentShoppingCart().showCartItems(
@@ -89,9 +89,6 @@ PersistentShoppingCart().showCartItems(
       },
     );
   },
-  showEmptyCartMsgWidget: Center(
-    child: Text('Your cart is empty!'), // Replace with your empty cart widget
-  ),
 );
 ```
 

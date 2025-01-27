@@ -102,16 +102,11 @@ class PersistentShoppingCart {
       BuildContext context,
       List<PersistentShoppingCartItem> cartItems,
     ) cartItemsBuilder,
-    required Widget showEmptyCartMsgWidget,
   }) {
     return ValueListenableBuilder<Box<PersistentShoppingCartItem>>(
       valueListenable: CartController().cartListenable,
       builder: (context, box, child) {
         final cartItems = CartController().getCartItems();
-
-        if (cartItems.isEmpty) {
-          return showEmptyCartMsgWidget;
-        }
 
         return cartItemsBuilder(context, cartItems);
       },

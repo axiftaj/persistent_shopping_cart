@@ -61,12 +61,14 @@ class _CartViewState extends State<CartView> {
                         itemCount: cartItems.length,
                         itemBuilder: (context, index) {
                           final data = cartItems[index];
+                          if (cartItems.isEmpty) {
+                            return const EmptyCartMsgWidget();
+                          }
                           return CartTileWidget(data: data);
                         },
                       );
                     }
                   },
-                  showEmptyCartMsgWidget: const EmptyCartMsgWidget(),
                 ),
               ),
               PersistentShoppingCart().showTotalAmountWidget(
