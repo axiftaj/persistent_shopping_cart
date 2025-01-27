@@ -39,6 +39,10 @@ class _CartViewState extends State<CartView> {
               Expanded(
                 child: PersistentShoppingCart().showCartItems(
                   cartItemsBuilder: (context, cartItems) {
+
+                    if(cartItems.isEmpty){
+                      return EmptyCartMsgWidget();
+                    }
                     if (_isGridView) {
                       return GridView.builder(
                         shrinkWrap: true,

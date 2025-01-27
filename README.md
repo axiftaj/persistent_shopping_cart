@@ -77,6 +77,10 @@ The showCartItems method now provides flexibility to define how cart items are d
 ```dart
 PersistentShoppingCart().showCartItems(
   cartItemsBuilder: (BuildContext context, List<PersistentShoppingCartItem> cartItems) {
+    // no item added to cart
+    if(cartItems.isEmpty){
+    return EmptyCartMsgWidget();
+    }
     // Define your custom widget for displaying cart items
     return ListView.builder(
       itemCount: cartItems.length,
